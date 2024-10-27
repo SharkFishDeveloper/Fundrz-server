@@ -21,7 +21,7 @@ const app = express();
 app.use(limiter);
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin: `http://localhost:3000`,credentials:true}));
+app.use(cors({origin: `https://fundrz-client.vercel.app/`,credentials:true}));
 
 mongoose.connect(process.env.DATABASE_URL).then(()=>console.log("Connected to the database")).catch((error)=> console.log("error connecting to db - ",error));
     
