@@ -25,7 +25,9 @@ router.post("/signup",async(req,res)=>{
         const token = jwt.sign({userId:newUser._id},process.env.JWT_SECRET_KEY,{ expiresIn: "24h" });
         res.cookie("fztoken",token,{
             httpOnly:true,
-            secure:true
+            secure:true,
+            sameSite: 'lax',    // Prevents CSRF in most cases; you could
+            maxAge: 3600000,
         });
         res.json({success:true,message:"User created",user:newUser,userID:newUser._id});  
     } catch (error) {
@@ -49,7 +51,9 @@ router.post("/login",async(req,res)=>{
     const token = jwt.sign({userId:user._id},process.env.JWT_SECRET_KEY,{ expiresIn: "24h" });
     res.cookie("fztoken",token,{
         httpOnly:true,
-        secure:true
+            secure:true,
+            sameSite: 'lax',    // Prevents CSRF in most cases; you could
+            maxAge: 3600000,
     });
     res.json({success:true,message:"logged in successfully",token:token,userID:user._id});
     
