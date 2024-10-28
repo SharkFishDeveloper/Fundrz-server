@@ -2,7 +2,6 @@ import express from "express";
 import { UserModal } from "../models/userModal.js";
 import jwt from 'jsonwebtoken';
 import { isLoggedIn } from "../middleware/userMiddleware.js";
-import { campaignModal } from "../models/CampaignModal.js";
 
 const router = express.Router();
 

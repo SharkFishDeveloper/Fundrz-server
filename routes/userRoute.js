@@ -25,8 +25,7 @@ router.post("/signup",async(req,res)=>{
         const token = jwt.sign({userId:newUser._id},process.env.JWT_SECRET_KEY,{ expiresIn: "24h" });
         res.cookie("fztoken",token,{
             httpOnly:true,
-            secure:true,
-            sameSite: 'lax',    // Prevents CSRF in most cases; you could
+            secure:true,  // Prevents CSRF in most cases; you could
             maxAge: 3600000,
         });
         res.json({success:true,message:"User created",user:newUser,userID:newUser._id});  
@@ -51,8 +50,7 @@ router.post("/login",async(req,res)=>{
     const token = jwt.sign({userId:user._id},process.env.JWT_SECRET_KEY,{ expiresIn: "24h" });
     res.cookie("fztoken",token,{
         httpOnly:true,
-            secure:true,
-            sameSite: 'lax',    // Prevents CSRF in most cases; you could
+            secure:true, // Prevents CSRF in most cases; you could
             maxAge: 3600000,
     });
     res.json({success:true,message:"logged in successfully",token:token,userID:user._id});
@@ -69,14 +67,6 @@ router.get("/logout",async(req,res)=>{
         if (!fztoken) {
             return res.status(401).json({ success: false, message: "Already logged out" });
         }
-    //const decodeToken = jwt.verify(fztoken,process.env.JWT_SECRET_KEY);
-    //const user = await UserModal.findById(decodeToken.userId);
-    // if(!user){
-    //     return res.json({ success: false, message: "User not found" });
-    // }else{
-    //     console.log(user);
-    //     res.json({success:true,foundUser:user,message:"foundUser"});
-    // }
     else{
         res.clearCookie('fztoken');
         res.status(200).json({ success: true, message: 'Logout successful' });
