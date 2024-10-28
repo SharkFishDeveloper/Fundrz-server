@@ -70,7 +70,11 @@ router.get("/logout",async(req,res)=>{
             return res.status(401).json({ success: false, message: "Already logged out" });
         }
     else{
-        res.clearCookie('fztoken');
+        res.clearCookie("fztoken", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        });
         res.status(200).json({ success: true, message: 'Logout successful' });
     }
     } catch (error) {
