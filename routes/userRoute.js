@@ -27,6 +27,7 @@ router.post("/signup",async(req,res)=>{
             httpOnly:true,
             secure:true,  // Prevents CSRF in most cases; you could
             maxAge: 3600000,
+            sameSite:"none"
         });
         res.json({success:true,message:"User created",user:newUser,userID:newUser._id});  
     } catch (error) {
@@ -52,6 +53,7 @@ router.post("/login",async(req,res)=>{
         httpOnly:true,
             secure:true, // Prevents CSRF in most cases; you could
             maxAge: 3600000,
+            sameSite:"none"
     });
     res.json({success:true,message:"logged in successfully",token:token,userID:user._id});
     
