@@ -18,6 +18,7 @@ const limiter = rateLimit({
 
 dotenv.config({path: "config.env"});
 const app = express();
+app.set('trust proxy', 1);
 app.use(limiter);
 app.use(express.json());
 app.use(cookieParser());
